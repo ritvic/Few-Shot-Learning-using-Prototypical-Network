@@ -20,7 +20,7 @@ We will use the official dataset when it will be added to torchvision if it does
 
 ### Dataset splits
 
-We implemented the Vynials splitting method as in [[Matching Networks for One Shot Learning](https://papers.nips.cc/paper/6385-matching-networks-for-one-shot-learning)]. That sould be the same method used in the paper (https://github.com/jakesnell/prototypical-networks/tree/master/data/omniglot/splits/vinyals). We then apply the same rotations there described. In this way we should be able to compare results obtained by running this code with results described in the reference paper.
+We implemented the Vynials splitting method as in [[Matching Networks for One Shot Learning](https://papers.nips.cc/paper/6385-matching-networks-for-one-shot-learning)]. That sould be the same method used in the [paper](https://github.com/jakesnell/prototypical-networks/tree/master/data/omniglot/splits/vinyals). We then apply the same rotations there described. In this way we should be able to compare results obtained by running this code with results described in the reference paper.
 
 ## Prototypical Batch Sampler
 
@@ -78,7 +78,7 @@ The script takes the following command line options:
 Running the command without arguments will train the models with the default hyperparamters values (producing results shown above).
 
 
-## Performances
+<!-- ## Performances
 
 We are trying to reproduce the reference paper performaces, we'll update here our best results. 
 
@@ -95,121 +95,7 @@ We are trying to reproduce the reference paper performaces, we'll update here ou
 
 °° achieved running `python train.py --cuda -nsTr 5 -nsVa 5 -cVa 20
 `
-
-
-
+ -->
 ## Helpful links
 
  - http://pytorch.org/docs/master/data.html: Official PyTroch documentation about Dataset classes, Dataloaders and Samplers
-
-## .bib citation
-cite the paper as follows (copied-pasted it from arxiv for you):
-
-    @article{DBLP:journals/corr/SnellSZ17,
-      author    = {Jake Snell and
-                   Kevin Swersky and
-                   Richard S. Zemel},
-      title     = {Prototypical Networks for Few-shot Learning},
-      journal   = {CoRR},
-      volume    = {abs/1703.05175},
-      year      = {2017},
-      url       = {http://arxiv.org/abs/1703.05175},
-      archivePrefix = {arXiv},
-      eprint    = {1703.05175},
-      timestamp = {Wed, 07 Jun 2017 14:41:38 +0200},
-      biburl    = {http://dblp.org/rec/bib/journals/corr/SnellSZ17},
-      bibsource = {dblp computer science bibliography, http://dblp.org}
-    }
-
-
-
-
-# Prototypical Networks
-
-[![Run on FloydHub](https://static.floydhub.com/button/button-small.svg)](https://floydhub.com/run)
-
-> Artificial Intelligence is the new electricity - Andrew NG
-
-The change occurred in our life after the expeditious growth in AI and deep learning, in particular, is a solid example of this. The research is booming at unprecedented speed and lives of thousands of people have been improved. If AI is the new electricity then definitely data is the new coal. But recently we’ve seen hazardous depletion in the amount of coal in our environment. This resulted in the development of new technologies which needed a fraction of coal or even no coal at all. Similarly, there are many applications in artificial intelligence where we only have meager data or even no data at all. Hence, we need new techniques to perform well in them. Such problems resulted in the growth of a very popular field, the field of N-shot learning.
-
-To know about it more, go to my blog at [N-Shot Learning: Learning More with Less Data](https://blog.floydhub.com/n-shot-learning/).
-
-To check out how this works, go to my notebook at [kaggle](https://www.kaggle.com/hsankesara/prototypical-net/)
-
-<table>
-    <tr>
-        <td><img src="img1.png" alt="Basic Idea behind prototypical Network"></td>
-        <td><img src="img2.png" alt="How prototypical Network works"></td>
-    </tr>
-</table>
-
-## Dataset
-
-![Omniglot Dataset](omniglot.jpg)
-
-The network was trained on the [Omniglot dataset](https://github.com/brendenlake/omniglot). The Omniglot data set is designed for developing more human-like learning algorithms. It contains 1623 different handwritten characters from 50 different alphabets.
-
-## How to use the Module
-
-First install all the necessary dependencies
-
-```bash
-pip3 install -r requirements.txt
-```
-
-- Download the dataset and save it in the directory
-- To train, test and save your own model first import the PrototypicalNet module
-
-```python
-from prototypicalNet import PrototypicalNet, train_step, test_step, load_weights
-```
-
-```python
-# Initializing prototypical net
-protonet = PrototypicalNet(use_gpu)
-```
-
-You can use a pretrained model
-
-```python
-# Using Pretrained Model
-protonet = load_weights('./protonet.pt', protonet, use_gpu)
-```
-
-Or simply train one by yourself
-
-```python
-import torch.optim as optim
-# Set training iterations and display period
-num_episode = 16000
-frame_size = 1000
-trainx = trainx.permute(0, 3, 1, 2)
-testx = testx.permute(0, 3, 1, 2)
-# Initializing prototypical net
-protonet = PrototypicalNet(use_gpu)
-optimizer = optim.SGD(protonet.parameters(), lr = 0.01, momentum=0.99)
-# Training loop
-frame_loss = 0
-frame_acc = 0
-for i in range(num_episode):
-    loss, acc = train_step(protonet, trainx, trainy, 5, 60, 5, optimizer)
-    frame_loss += loss.data
-    frame_acc += acc.data
-    if((i+1) % frame_size == 0):
-        print("Frame Number:", ((i+1) // frame_size), 'Frame Loss: ',frame_loss.data.cpu().numpy().tolist() /
-              frame_size, 'Frame Accuracy:', (frame_acc.data.cpu().numpy(.tolist() * 100) / frame_size)
-        frame_loss = 0
-        frame_acc = 0
-```
-
-To know more checkout [this](main.py)
-
-Want to use a customized model?
-
-No worries, simply download the code and make suitable changes [here](prototypicalNet.py)
-
-## Project Manager
-
-**[Heet Sankesara](https://github.com/Hsankesara)**
-
-[<img src="http://i.imgur.com/0o48UoR.png" width="35" padding="10" margin="10">](https://github.com/Hsankesara/) [<img src="https://i.imgur.com/0IdggSZ.png" width="35" padding="10" margin="10">](https://www.linkedin.com/in/heet-sankesara-72383a152/) [<img src="http://i.imgur.com/tXSoThF.png" width="35" padding="10" margin="10">](https://twitter.com/heetsankesara3) [<img src="https://loading.io/s/icon/vzeour.svg" width="35" padding="10" margin="10">](https://www.kaggle.com/hsankesara)
