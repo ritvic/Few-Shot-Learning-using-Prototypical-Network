@@ -257,7 +257,6 @@ with tqdm(enumerate(train_loader), total=len(train_loader)) as tqdm_train:
         if episode_index % log_update_frequency == 0:
             tqdm_train.set_postfix(loss=sliding_average(all_loss, log_update_frequency))
 
-# Or just load mine
 
 !wget https://public-sicara.s3.eu-central-1.amazonaws.com/easy-fsl/resnet18_with_pretraining.tar
 model.load_state_dict(torch.load("resnet18_with_pretraining.tar", map_location="cuda"))
